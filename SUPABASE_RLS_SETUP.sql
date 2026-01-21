@@ -72,18 +72,5 @@ ON conversations
 FOR SELECT
 USING (true); -- Backend filters by phone_number
 
--- ============================================
--- IMPORTANT NOTES:
--- ============================================
--- 
--- 1. These policies allow backend operations because the backend
---    uses the anon key and filters data by phone_number in application code.
---
--- 2. For better security in production, consider:
---    - Using service_role key for backend (bypasses RLS)
---    - Adding phone_number verification in policies
---    - Implementing authentication tokens
---
--- 3. Current setup is good for development/testing
---    The backend code already filters by phone_number, adding an extra layer of security.
+
 
