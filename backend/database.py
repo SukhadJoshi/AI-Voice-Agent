@@ -80,20 +80,7 @@ def get_db_connection():
 
 def execute_query(conn: Client, query: str, params: Tuple) -> Optional[List]:
     """Execute a query (for Supabase, we use the client methods)"""
-    # For Supabase, we'll use the client's methods
-    # This is a simplified wrapper - in practice, you'd use Supabase's query builder
-    # For now, we'll use raw SQL via RPC or direct table operations
     
-    # Note: Supabase Python client doesn't support raw SQL directly
-    # We'll use table operations instead
-    # This is a placeholder - actual implementation depends on your Supabase setup
-    
-    # For INSERT operations, use: conn.table("table_name").insert(data).execute()
-    # For UPDATE operations, use: conn.table("table_name").update(data).eq("id", id).execute()
-    # For DELETE operations, use: conn.table("table_name").delete().eq("id", id).execute()
-    
-    # Since we can't execute raw SQL easily, we'll need to refactor tools.py
-    # to use Supabase's query builder methods
     pass
 
 
