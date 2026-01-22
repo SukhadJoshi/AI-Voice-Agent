@@ -34,7 +34,7 @@ from summary import generate_summary
 load_dotenv()
 
 # #region agent log - Debug instrumentation
-DEBUG_LOG_PATH = r"c:\SuperBryn_Task Challenge\.cursor\debug.log"
+
 def debug_log(location, message, data=None, hypothesis_id=None, session_id="debug-session", run_id="run1"):
     try:
         import json
@@ -256,11 +256,7 @@ async def entrypoint(ctx: JobContext):
             api_key = os.getenv("OPENROUTER_API_KEY")
             base_url = "https://openrouter.ai/api/v1"
             llm_client = OpenAI(api_key=api_key, base_url=base_url)
-            # Use truly free models only (models with :free suffix don't require credits)
-            # Note: Free models don't support tool use, so we'll work without tools
-            # Truly free models on OpenRouter (require :free suffix):
-            # - "meta-llama/llama-3.2-3b-instruct:free" (completely free)
-            # - "google/gemini-2.0-flash-exp:free" (if available)
+          
             model = "meta-llama/llama-3.2-3b-instruct:free"  # Truly free model, no credits needed
         elif llm_provider == "together":
             # Together AI uses OpenAI-compatible API
@@ -556,17 +552,7 @@ async def entrypoint(ctx: JobContext):
 
 {phone_status}
 
-CRITICAL RULES - DO NOT ECHO USER INPUT:
-1. NEVER repeat or paraphrase what the user said. Instead, provide helpful next steps.
-2. If phone number is already provided (see above), DO NOT ask for it again. Move to next step.
-3. If user wants to book but phone is missing: Say "Could you please provide your phone number?" (ONCE only).
-4. If user gives unclear response (like "yeah", "okay", "go ahead"): 
-   - If phone is missing: Ask "Could you please provide your phone number?"
-   - If phone exists: Ask "Would you like to see available appointment slots?"
-5. When user provides phone number: System will automatically save it, then you should ask "Would you like to see available slots?"
-6. When user asks for slots: System will automatically fetch them.
-7. When user wants to book: System will automatically book with their phone number, date, and time.
-8. Be DIRECT and ACTIONABLE - never echo what user said. Flow: phone (if needed) → slots → booking."""
+
 
                 messages = [
                     {"role": "system", "content": system_prompt}
@@ -608,8 +594,7 @@ CRITICAL RULES - DO NOT ECHO USER INPUT:
                                     "arguments": json.dumps(content_block.input)
                                 })
                 else:
-                    # Use OpenAI-compatible client (OpenRouter, Together, OpenAI)
-                    # Make tool use optional - some free models don't support it
+                 
                     try:
                         response = llm_client.chat.completions.create(
                             model=model,
