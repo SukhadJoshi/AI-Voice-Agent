@@ -35,16 +35,7 @@ async def generate_summary(conversation_history: list, phone_number: str, conver
     # Generate summary using LLM
     llm_provider = os.getenv("LLM_PROVIDER", "openai")
     
-    summary_prompt = f"""Please provide a concise summary of the following conversation. Include:
-1. Main topics discussed
-2. Any appointments booked or modified
-3. User preferences mentioned
-4. Key decisions made
-
-Conversation:
-{conversation_text}
-
-Summary:"""
+  
     
     try:
         if llm_provider == "openai":
