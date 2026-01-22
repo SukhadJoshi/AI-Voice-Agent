@@ -1,7 +1,4 @@
-"""
-Simple token generation server for LiveKit
-Run this separately or integrate into your main backend
-"""
+
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
